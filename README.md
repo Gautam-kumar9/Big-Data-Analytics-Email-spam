@@ -465,7 +465,7 @@ spam, Congratulations! You won a free prize
 # 👨‍💻 Author
 
 **Gautam Kumar** 
-\n
+   and
 **Saahil Kapoor**
 
 GitHub:
