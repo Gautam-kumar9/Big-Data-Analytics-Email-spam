@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Email Spam Detection Dashboard</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+
+body{
+font-family:Arial;
+background:linear-gradient(135deg,#e3f2fd,#fce4ec);
+text-align:center;
+margin:0;
+padding:30px;
+}
+
+h1{
+color:#2c3e50;
+}
+
+.container{
+background:white;
+width:650px;
+margin:auto;
+padding:30px;
+border-radius:12px;
+box-shadow:0px 5px 20px rgba(0,0,0,0.15);
+}
+
+textarea{
+width:100%;
+padding:12px;
+font-size:16px;
+border-radius:6px;
+border:1px solid #ccc;
+}
+
+button{
+padding:12px 25px;
+font-size:16px;
+background:#2196F3;
+color:white;
+border:none;
+border-radius:6px;
+cursor:pointer;
+}
+
+button:hover{
+background:#1976D2;
+}
+
+.result{
+margin-top:20px;
+font-size:24px;
+font-weight:bold;
+}
+
+.stats{
+margin-top:40px;
+display:flex;
+justify-content:center;
+gap:20px;
+flex-wrap:wrap;
+}
+
+.card{
+background:white;
+padding:18px;
+width:200px;
+border-radius:10px;
+box-shadow:0px 4px 12px rgba(0,0,0,0.15);
+}
+
+.chart-box{
+margin-top:40px;
+width:450px;
+margin-left:auto;
+margin-right:auto;
+}
+
+.examples{
+margin-top:40px;
+width:750px;
+margin-left:auto;
+margin-right:auto;
+text-align:left;
+}
+
+.example-box{
+background:white;
+padding:15px;
+margin-top:10px;
+border-radius:10px;
+box-shadow:0px 4px 10px rgba(0,0,0,0.15);
+}
+
+.keyword-box{
+margin-top:20px;
+}
+
+.keyword{
+display:inline-block;
+background:#fff176;
+padding:6px 12px;
+margin:5px;
+border-radius:6px;
+font-weight:bold;
+}
+
+.wordcloud{
+margin-top:40px;
+}
+
+.analysis{
+margin-top:25px;
+}
+
+.spam-word{
+background:#ff5252;
+color:white;
+padding:4px 7px;
+border-radius:4px;
+font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>📧 Email Spam Detection Dashboard</h1>
+
+<div class="container">
+
+<form method="POST">
+
+<textarea name="message" rows="6" placeholder="Paste email text here"></textarea>
+
+<br><br>
+
+<button type="submit">Predict Email</button>
+
+</form>
+
+<div class="result">
+{{ result }}
+</div>
+
+{% if spam_prob %}
+
+<div class="analysis">
+
+<p><b>Spam Probability:</b> {{ spam_prob }}%</p>
+<p><b>Ham Probability:</b> {{ ham_prob }}%</p>
+
+<p><b>Characters:</b> {{ char_count }}</p>
+<p><b>Words:</b> {{ word_count }}</p>
+
+</div>
+
+{% endif %}
+
+</div>
+
+
+<!-- Highlighted Spam Words -->
+
+{% if highlighted_text %}
+
+<div class="examples">
+
+<h2>Model Explanation (Highlighted Spam Words)</h2>
+
+<div class="example-box">
+<p>{{ highlighted_text | safe }}</p>
+</div>
+
+</div>
+
+{% endif %}
+
+
+<!-- Dataset Statistics -->
+
+<h2>Dataset Statistics</h2>
+
+<div class="stats">
+
+<div class="card">
+<h3>Total Emails</h3>
+<p>{{ total }}</p>
+</div>
+
+<div class="card">
+<h3>Spam Emails</h3>
+<p>{{ spam }}</p>
+<p>{{ spam_percent }}%</p>
+</div>
+
+<div class="card">
+<h3>Ham Emails</h3>
+<p>{{ ham }}</p>
+<p>{{ ham_percent }}%</p>
+</div>
+
+</div>
+
+
+<!-- Pie Chart -->
+
+<div class="chart-box">
+
+<h2>Spam vs Ham Distribution</h2>
+
+<canvas id="spamChart"></canvas>
+
+</div>
+
+
+<!-- Example Emails -->
+
+<div class="examples">
+
+<h2>Example Emails from Dataset</h2>
+
+<div class="example-box">
+<b>🚨 Spam Example:</b>
+<p>{{ spam_example }}</p>
+</div>
+
+<div class="example-box">
+<b>✅ Ham Example:</b>
+<p>{{ ham_example }}</p>
+</div>
+
+</div>
+
+
+<!-- Feature Impact -->
+
+<div class="examples">
+
+<h2>Top Spam Keywords (Feature Impact)</h2>
+
+<div class="keyword-box">
+
+{% for word in top_keywords %}
+<span class="keyword">{{ word }}</span>
+{% endfor %}
+
+</div>
+
+</div>
+
+
+<!-- Word Cloud -->
+
+<div class="wordcloud">
+
+<h2>Spam Word Cloud</h2>
+
+<img src="{{ url_for('static', filename='wordcloud.png') }}" width="550">
+
+</div>
+
+
+<script>
+
+var spam = {{ spam }};
+var ham = {{ ham }};
+
+var ctx = document.getElementById('spamChart').getContext('2d');
+
+new Chart(ctx,{
+type:'pie',
+data:{
+labels:['Spam','Ham'],
+datasets:[{
+data:[spam,ham],
+backgroundColor:[
+'#ff5252',
+'#4caf50'
+]
+}]
+}
+});
+
+</script>
+
+</body>
+</html>
