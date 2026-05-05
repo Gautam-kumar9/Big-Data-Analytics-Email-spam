@@ -416,23 +416,28 @@ Actual Spam  40    707
 
 ### Spam vs Ham Distribution
 
-![Spam vs Ham](spam_ham_distribution.png)
+<img width="929" height="687" alt="image" src="https://github.com/user-attachments/assets/4a0c1d35-79d8-4f00-a2d5-41c8d046ee4e" />
+
 
 ### Spam vs Ham Pie Chart
+<img width="706" height="587" alt="image" src="https://github.com/user-attachments/assets/0bc8944a-2270-47a6-8bde-1d8f33daf892" />
 
-![Pie Chart](spam_ham_pie.png)
+
+
 
 ### Email Length Distribution
+<img width="874" height="686" alt="image" src="https://github.com/user-attachments/assets/97c26a7d-5a23-4663-9d6b-a2837751769f" />
 
-![Length Distribution](email_length_distribution.png)
 
 ### Top Spam Words
 
-![Top Words](top_spam_words.png)
+<img width="894" height="691" alt="image" src="https://github.com/user-attachments/assets/75f54d4f-9be0-4b85-af33-fd3a7ea6b25d" />
+
 
 ### Confusion Matrix
 
-![Confusion Matrix](confusion_matrix_updated.png)
+<img width="885" height="678" alt="image" src="https://github.com/user-attachments/assets/fc318c8c-989b-444c-a56b-8544084016ec" />
+
 
 ---
 
