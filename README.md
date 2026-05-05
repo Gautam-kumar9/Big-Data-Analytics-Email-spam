@@ -274,7 +274,7 @@ sbin/start-worker.sh spark://master:7077
 Verify:
 
 ```
-**jps**
+jps
 ```
 
 Expected:
@@ -317,8 +317,6 @@ hdfs dfs -ls /user/gugu
 
 # 🤖 Train Spam Detection Model
 
-**Run the Spark training script:**
-
 ```
 spark-submit train_model.py
 ```
@@ -333,7 +331,7 @@ Training steps:
 6. Logistic Regression training
 7. Save pipeline model
 
-**Model saved to:**
+Model saved to:
 
 ```
 hdfs://master:9000/user/gugu/spam_pipeline_model
@@ -343,19 +341,12 @@ hdfs://master:9000/user/gugu/spam_pipeline_model
 
 # 🌐 Run the Web Application
 
-**Go to project folder:**
-
 ```
 cd spam_ui
-```
-
-**Run:**
-
-```
 spark-submit app.py
 ```
 
-**Open browser:**
+Open:
 
 ```
 http://localhost:5000
@@ -363,34 +354,85 @@ http://localhost:5000
 
 ---
 
-# 📊 Dashboard Features
+# 📊 Dataset
 
-### Email Prediction
+This project uses a **trimmed and preprocessed version of the Enron Email Dataset**.
 
-* Spam / Not Spam classification
-* Probability score
+### Dataset Statistics
 
-### Email Analysis
+| Metric          | Value |
+| --------------- | ----- |
+| Total Emails    | 5572  |
+| Spam Emails     | 747   |
+| Ham Emails      | 4825  |
+| Spam Percentage | 13.4% |
+| Ham Percentage  | 86.6% |
 
-* Character count
-* Word count
+Example:
 
-### Dataset Insights
+```
+ham, Hey are we meeting tomorrow?
+spam, Congratulations! You won a free prize
+```
 
-* Total emails
-* Spam emails
-* Ham emails
-* Spam percentage
+---
 
-### Visualizations
+# 📊 Model Performance & Results
 
-* Spam vs Ham **Pie Chart**
-* Spam **Word Cloud**
+### Accuracy Comparison
 
-### Explainable AI
+| Model               | Accuracy     |
+| ------------------- | ------------ |
+| Logistic Regression | **97.53%** ✅ |
+| Naive Bayes         | 95.80%       |
+| Random Forest       | 96.10%       |
+| Decision Tree       | 93.40%       |
 
-* **Top spam keywords**
-* **Highlighted spam words in user email**
+### 🏆 Best Model: Logistic Regression
+
+Logistic Regression achieved the highest accuracy of **97.53%** due to its ability to handle high-dimensional TF-IDF features effectively.
+
+---
+
+# 📊 Confusion Matrix
+
+```
+             Predicted
+           Ham     Spam
+Actual Ham 4718    107
+Actual Spam  40    707
+```
+
+### Explanation
+
+* True Positives → 707
+* True Negatives → 4718
+* False Positives → 107
+* False Negatives → 40
+
+---
+
+# 📊 Dataset Visualization
+
+### Spam vs Ham Distribution
+
+![Spam vs Ham](spam_ham_distribution.png)
+
+### Spam vs Ham Pie Chart
+
+![Pie Chart](spam_ham_pie.png)
+
+### Email Length Distribution
+
+![Length Distribution](email_length_distribution.png)
+
+### Top Spam Words
+
+![Top Words](top_spam_words.png)
+
+### Confusion Matrix
+
+![Confusion Matrix](confusion_matrix_updated.png)
 
 ---
 
@@ -410,7 +452,7 @@ Spam Probability: 92%
 Ham Probability: 8%
 ```
 
-Highlighted words:
+Highlighted:
 
 ```
 [Free] [money] [offer]
@@ -420,13 +462,13 @@ Highlighted words:
 
 # 🧠 Machine Learning Model
 
-Algorithm used:
+Algorithm:
 
 ```
 Logistic Regression
 ```
 
-Feature pipeline:
+Pipeline:
 
 ```
 Tokenizer
@@ -438,24 +480,9 @@ LogisticRegression
 
 ---
 
-# 📊 Dataset
-
-Dataset used:
-
-**SMS Spam Collection Dataset**
-
-Example records:
-
-```
-ham, Hey are we meeting tomorrow?
-spam, Congratulations! You won a free prize
-```
-
----
-
 # 🔮 Future Improvements
 
-* Confusion Matrix Visualization
+* Advanced confusion matrix analysis
 * Real-time email integration
 * Advanced NLP preprocessing
 * Deep learning spam detection
@@ -464,8 +491,8 @@ spam, Congratulations! You won a free prize
 
 # 👨‍💻 Author
 
-**Gautam Kumar** 
-   and
+**Gautam Kumar**
+and
 **Saahil Kapoor**
 
 GitHub:
@@ -473,4 +500,6 @@ https://github.com/Gautam-kumar9
 
 ---
 
+# ⭐ Support
 
+If you like this project, give it a ⭐ on GitHub.
